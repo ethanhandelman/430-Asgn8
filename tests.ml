@@ -63,6 +63,13 @@ let tests = "test suite for interp top_env" >::: [
 
   "if1" >:: (fun _ -> assert_equal (interp top_env (IfC ((IdC "true"), (NumC (Int 1)), (NumC (Int 0))))) (NumV (Int 1)));
 
+  "if2" >:: (fun _ -> assert_equal (interp top_env (IfC ((IdC "false"), (NumC (Int 1)), (NumC (Int 0))))) (NumV (Int 0)));
+
+  "iferr" >:: (fun _ -> assert_raises (Invalid_argument "Given condition does not evaluate to boolean value")
+  (fun () -> (interp top_env (IfC ((NumC (Int 3)), (NumC (Int 1)), (NumC (Int 0)))))));
+
+  "lam1" >:: (fun _ -> assert_equal (interp top_env (LamC (["a"; "b"], (NumC (Int 1))))) (CloV (["a"; "b"], (NumC (Int 1)), top_env)));
+
 ]
 
 let _ = run_test_tt_main tests
