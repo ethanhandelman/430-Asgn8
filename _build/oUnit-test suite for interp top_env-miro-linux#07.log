@@ -1,0 +1,9 @@
+2024-12-06T04:52:24+00:00 miro-linux#07 I: Start test test suite for interp top_env:6:minus.
+2024-12-06T04:52:24+00:00 miro-linux#07 I: Test test suite for interp top_env:6:minus is successful.
+2024-12-06T04:52:24+00:00 miro-linux#07 I: End test test suite for interp top_env:6:minus.
+2024-12-06T04:52:24+00:00 miro-linux#07 I: Start test test suite for interp top_env:18:equalints.
+2024-12-06T04:52:24+00:00 miro-linux#07 I: Test test suite for interp top_env:18:equalints is successful.
+2024-12-06T04:52:24+00:00 miro-linux#07 I: End test test suite for interp top_env:18:equalints.
+2024-12-06T04:52:24+00:00 miro-linux#07 I: Start test test suite for interp top_env:28:test-println.
+2024-12-06T04:52:24+00:00 miro-linux#07 I: Test test suite for interp top_env:28:test-println is successful.
+2024-12-06T04:52:24+00:00 miro-linux#07 I: End test test suite for interp top_env:28:test-println.

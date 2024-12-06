@@ -94,11 +94,13 @@ let tests = "test suite for interp top_env" >::: [
   [NumC (Int 3); NumC (Int 4)]))) (StringV "34"));
 
   "plusplus3" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
-  [NumC (Int 3); NumC (Float 4.0)]))) (StringV "34.0"));
+  [NumC (Int 3); NumC (Float 4.0)]))) (StringV "34."));
 
-  "test-seq" >:: (fun _ -> assert_equal(interp top_env (AppC ((IdC "seq"), [(NumC (Int 1)); (NumC (Int 2)); (NumC (Int 3))]))) (NumV (Int 3)));
+  "test-seq" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "seq"), [(NumC (Int 1)); (NumC (Int 2)); (NumC (Int 3))]))) (NumV (Int 3)));
 
-  "test-println" >:: test_print
+  "test-println" >:: test_print;
+
+  "test-clov" >:: (fun _ -> assert_equal (interp top_env (AppC ((LamC (["a"; "b"], (NumC (Int 1)))), [(NumC (Int 2)); (NumC (Int 3))]))) (NumV (Int 1)));
 
 ]
 

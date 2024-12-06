@@ -1,0 +1,15 @@
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Start test test suite for interp top_env:3:plus2.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Test test suite for interp top_env:3:plus2 is successful.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: End test test suite for interp top_env:3:plus2.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Start test test suite for interp top_env:8:minus3.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Test test suite for interp top_env:8:minus3 is successful.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: End test test suite for interp top_env:8:minus3.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Start test test suite for interp top_env:14:lessthan.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Test test suite for interp top_env:14:lessthan is successful.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: End test test suite for interp top_env:14:lessthan.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Start test test suite for interp top_env:19:unequalints.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Test test suite for interp top_env:19:unequalints is successful.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: End test test suite for interp top_env:19:unequalints.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Start test test suite for interp top_env:27:test-seq.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: Test test suite for interp top_env:27:test-seq is successful.
+2024-12-06T04:52:24+00:00 miro-linux#04 I: End test test suite for interp top_env:27:test-seq.

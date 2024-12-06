@@ -1,0 +1,12 @@
+2024-12-06T04:52:24+00:00 miro-linux#01 I: Start test test suite for interp top_env:0:num.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: Test test suite for interp top_env:0:num is successful.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: End test test suite for interp top_env:0:num.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: Start test test suite for interp top_env:11:division3.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: Test test suite for interp top_env:11:division3 is successful.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: End test test suite for interp top_env:11:division3.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: Start test test suite for interp top_env:17:lessthan4.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: Test test suite for interp top_env:17:lessthan4 is successful.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: End test test suite for interp top_env:17:lessthan4.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: Start test test suite for interp top_env:23:lam1.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: Test test suite for interp top_env:23:lam1 is successful.
+2024-12-06T04:52:24+00:00 miro-linux#01 I: End test test suite for interp top_env:23:lam1.
