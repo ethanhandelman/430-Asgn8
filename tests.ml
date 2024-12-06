@@ -1,7 +1,24 @@
 open OUnit2
 open Asgn8
+open Unix
 (* opam install ounit2 *)
 (* Run "ocamlfind ocamlc -o test -package oUnit2 -linkpkg asgn8.ml", and then run "./test" *)
+  
+let test_print _ =
+  let old_stdout = dup stdout in  (* Save the current stdout *)
+  let pipe_r, pipe_w = pipe () in  (* Create a pipe to capture the output *)
+
+  dup2 pipe_w stdout;
+
+  let _ = interp top_env (AppC ((IdC "println"), [StringC "Hello, World!"])) in
+  close pipe_w;
+  let output = input_line (in_channel_of_descr pipe_r) in
+  assert_equal "Hello, World!" output;
+
+  (* Restore the original stdout *)
+  dup2 old_stdout stdout;
+  close pipe_r;
+  close old_stdout
 
 
 let tests = "test suite for interp top_env" >::: [
@@ -70,13 +87,18 @@ let tests = "test suite for interp top_env" >::: [
 
   "lam1" >:: (fun _ -> assert_equal (interp top_env (LamC (["a"; "b"], (NumC (Int 1))))) (CloV (["a"; "b"], (NumC (Int 1)), top_env)));
 
-  (* ++ tests *)
-
   "plusplus1" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
-  [StringC "aaa"; StringC "bbb"])) (StringV "aaabbb")))
+  [StringC "aaa"; StringC "bbb"]))) (StringV "aaabbb"));
 
-  "plusplus1" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
-  [NumC (Int 3); NumC (Int 4)])) (StringV "34")))
+  "plusplus2" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
+  [NumC (Int 3); NumC (Int 4)]))) (StringV "34"));
+
+  "plusplus3" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
+  [NumC (Int 3); NumC (Float 4.0)]))) (StringV "34.0"));
+
+  "test-seq" >:: (fun _ -> assert_equal(interp top_env (AppC ((IdC "seq"), [(NumC (Int 1)); (NumC (Int 2)); (NumC (Int 3))]))) (NumV (Int 3)));
+
+  "test-println" >:: test_print
 
 ]
 

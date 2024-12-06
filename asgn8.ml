@@ -58,15 +58,15 @@ let read_number () =
   let input = read_line () in
   try
     let int_value = int_of_string input in
-    NumV (`Int int_value)
+    NumV (Int int_value)
   with
   | Failure _ -> (
       try
         let float_value = float_of_string input in
-        NumV (`Float float_value)
+        NumV (Float float_value)
       with
       | Failure _ ->
-          print_endline "Invalid input. Please enter a valid number.";
+          raise (Invalid_argument "Invalid number as input")
     )
 
 let rec interp env expr : value = 
@@ -87,7 +87,9 @@ let rec interp env expr : value =
           begin
             match op with
             | "read-num" -> read_number ()
-            | "read-str" -> read_line ()
+            | "read-str" -> StringV (read_line ())
+            | _ -> raise (Invalid_argument "Invalid binop for no args")
+          end
         | [NumV (Int n1); NumV (Int n2)] -> 
           begin
           match op with
@@ -122,12 +124,14 @@ let rec interp env expr : value =
           begin
             match op with
             | "++" -> StringV (string_of_int n1 ^ string_of_float n2)
-            | _ -> (Invalid_argument "Invalid operation for types int and float")
+            | _ -> raise (Invalid_argument "Invalid operation for types int and float")
+          end
         | [NumV (Float n1); NumV (Int n2)] ->
           begin
             match op with
-            | "++" -> StringV (string_of_float n2 ^ string_of_int n2)
-            | _ -> (Invalid_argument "Invalid operation for types float and int")
+            | "++" -> StringV (string_of_float n1 ^ string_of_int n2)
+            | _ -> raise (Invalid_argument "Invalid operation for types float and int")
+          end
         | [StringV s1; StringV s2] ->
           begin
             match op with
@@ -148,7 +152,7 @@ let rec interp env expr : value =
           | "seq" -> last_val_of_list interped_args
           | _ -> raise (Invalid_argument "Invalid arg list for PrimOpV")
           end
-         end
+      end
     | CloV (params, c_body, e) -> 
       let interped_args = map_with_args interp env args in
       interp (extend_env params interped_args e) c_body
