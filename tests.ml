@@ -51,12 +51,15 @@ let tests = "test suite for interp top_env" >::: [
   "division2" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "/"),
   [NumC (Float 9.0); NumC (Float 4.5)]))) (NumV (Float 2.0)));
 
+  (*testing that an error is thrown when dividing by 0 (floats)*)
   "division3" >:: (fun _ -> assert_raises (Invalid_argument "Division by zero error")
   (fun () -> (interp top_env (AppC ((IdC "/"), [NumC (Float 9.0); NumC (Float 0.0)])))));
-
+  
+  (*testing that an error is thrown when dividing by 0 (ints)*)
   "division4" >:: (fun _ -> assert_raises (Invalid_argument "Division by zero error")
   (fun () -> (interp top_env (AppC ((IdC "/"), [NumC (Int 9); NumC (Int 0)])))));
 
+  (*testing that interp correctly recurses on nested expressions like the args of an AppC*)
   "nestedplus" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "+"), 
   [AppC ((IdC "+"), [NumC (Int 2); NumC (Int 6)]); NumC (Int 3)]))) (NumV (Int 11)));
 
@@ -78,21 +81,28 @@ let tests = "test suite for interp top_env" >::: [
   "unequalints" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "equal?"),
   [NumC (Int 5); NumC (Int 6)]))) (BoolV false));
 
+  (*true test for if statements*)
   "if1" >:: (fun _ -> assert_equal (interp top_env (IfC ((IdC "true"), (NumC (Int 1)), (NumC (Int 0))))) (NumV (Int 1)));
 
+  (*false test for if statement*)
   "if2" >:: (fun _ -> assert_equal (interp top_env (IfC ((IdC "false"), (NumC (Int 1)), (NumC (Int 0))))) (NumV (Int 0)));
 
+  (*tests error for if statement when given a non-boolean expression for condition*)
   "iferr" >:: (fun _ -> assert_raises (Invalid_argument "Given condition does not evaluate to boolean value")
   (fun () -> (interp top_env (IfC ((NumC (Int 3)), (NumC (Int 1)), (NumC (Int 0)))))));
 
+  (*test creation of closure from lambda*)
   "lam1" >:: (fun _ -> assert_equal (interp top_env (LamC (["a"; "b"], (NumC (Int 1))))) (CloV (["a"; "b"], (NumC (Int 1)), top_env)));
 
+  (*test string concatenation*)
   "plusplus1" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
   [StringC "aaa"; StringC "bbb"]))) (StringV "aaabbb"));
 
+  (*test string concatenation using numbers*)
   "plusplus2" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
   [NumC (Int 3); NumC (Int 4)]))) (StringV "34"));
 
+  (*test string concatenation using combination of int and float*)
   "plusplus3" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
   [NumC (Int 3); NumC (Float 4.0)]))) (StringV "34."));
 
