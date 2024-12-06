@@ -48,27 +48,6 @@ let rec extend_env params args env =
       | a_head :: a_tail -> Binding (p_head, a_head) :: (extend_env p_tail a_tail env)
       | _ ->  raise (Invalid_argument "Invalid arg length list for CloV")))
 
-let rec last_val_of_list lst =
-  match lst with
-  | [] -> failwith "List is empty"
-  | [x] -> x
-  | _ :: rest -> last_val_of_list rest
-
-let read_number () =
-  let input = read_line () in
-  try
-    let int_value = int_of_string input in
-    NumV (`Int int_value)
-  with
-  | Failure _ -> (
-      try
-        let float_value = float_of_string input in
-        NumV (`Float float_value)
-      with
-      | Failure _ ->
-          print_endline "Invalid input. Please enter a valid number.";
-    )
-
 let rec interp env expr : value = 
   begin
   match expr with
@@ -83,11 +62,6 @@ let rec interp env expr : value =
       let interped_args = map_with_args interp env args in
       begin
       match interped_args with
-        | [] ->
-          begin
-            match op with
-            | "read-num" -> read_number ()
-            | "read-str" -> read_line ()
         | [NumV (Int n1); NumV (Int n2)] -> 
           begin
           match op with
@@ -100,7 +74,6 @@ let rec interp env expr : value =
             else NumV (Int (n1 / n2))
           | "<=" -> BoolV (n1 <= n2)
           | "equal?" -> BoolV (n1 = n2)
-          | "++" -> StringV (string_of_int n1 ^ string_of_int n2)
           | _ ->  raise (Invalid_argument "Invalid binop op for 2 ints")
           end
         | [NumV (Float n1); NumV (Float n2)] ->
@@ -115,24 +88,7 @@ let rec interp env expr : value =
             else NumV (Float (n1 /. n2))
           | "<=" -> BoolV (n1 <= n2)
           | "equal?" -> BoolV (n1 = n2)
-          | "++" -> StringV (string_of_float n1 ^ string_of_float n2)
           | _ -> raise (Invalid_argument "Invalid binop op for 2 floats")
-          end
-        | [NumV (Int n1); NumV (Float n2)] ->
-          begin
-            match op with
-            | "++" -> StringV (string_of_int n1 ^ string_of_float n2)
-            | _ -> (Invalid_argument "Invalid operation for types int and float")
-        | [NumV (Float n1); NumV (Int n2)] ->
-          begin
-            match op with
-            | "++" -> StringV (string_of_float n2 ^ string_of_int n2)
-            | _ -> (Invalid_argument "Invalid operation for types float and int")
-        | [StringV s1; StringV s2] ->
-          begin
-            match op with
-            | "++" -> StringV (s1 ^ s2)
-            | _ -> raise (Invalid_argument "Invalid operation for two strings")
           end
         | [StringV s] ->
           begin
@@ -142,12 +98,7 @@ let rec interp env expr : value =
             BoolV true
           | _ -> raise (Invalid_argument "Invalid PrimOpV with arg of one string.")
           end
-        | _ ->
-          begin
-          match op with
-          | "seq" -> last_val_of_list interped_args
-          | _ -> raise (Invalid_argument "Invalid arg list for PrimOpV")
-          end
+        | _ -> raise (Invalid_argument "Invalid arg list for PrimOpV")
          end
     | CloV (params, c_body, e) -> 
       let interped_args = map_with_args interp env args in

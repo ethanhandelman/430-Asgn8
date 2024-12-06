@@ -70,14 +70,6 @@ let tests = "test suite for interp top_env" >::: [
 
   "lam1" >:: (fun _ -> assert_equal (interp top_env (LamC (["a"; "b"], (NumC (Int 1))))) (CloV (["a"; "b"], (NumC (Int 1)), top_env)));
 
-  (* ++ tests *)
-
-  "plusplus1" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
-  [StringC "aaa"; StringC "bbb"])) (StringV "aaabbb")))
-
-  "plusplus1" >:: (fun _ -> assert_equal (interp top_env (AppC ((IdC "++"),
-  [NumC (Int 3); NumC (Int 4)])) (StringV "34")))
-
 ]
 
 let _ = run_test_tt_main tests

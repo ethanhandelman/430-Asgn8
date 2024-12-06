@@ -1,0 +1,12 @@
+2024-12-05T23:46:25+00:00 miro-linux#02 I: Start test test suite for interp top_env:1:string.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: Test test suite for interp top_env:1:string is successful.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: End test test suite for interp top_env:1:string.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: Start test test suite for interp top_env:8:minus3.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: Test test suite for interp top_env:8:minus3 is successful.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: End test test suite for interp top_env:8:minus3.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: Start test test suite for interp top_env:15:lessthan2.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: Test test suite for interp top_env:15:lessthan2 is successful.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: End test test suite for interp top_env:15:lessthan2.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: Start test test suite for interp top_env:19:unequalints.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: Test test suite for interp top_env:19:unequalints is successful.
+2024-12-05T23:46:25+00:00 miro-linux#02 I: End test test suite for interp top_env:19:unequalints.
